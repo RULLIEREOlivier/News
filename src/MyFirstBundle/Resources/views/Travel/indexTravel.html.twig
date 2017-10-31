@@ -1,0 +1,29 @@
+{% extends '::base.html.twig' %}
+{% block body%}
+   <table>
+	    <tr>
+
+		    <td>Départ</td>
+		    <td>Arrivée</td>
+		    <td>date de départ</td>
+        <td>date d'arrivée</td>
+      </tr>
+{% for travel in allTravel %}
+    <tr>
+      <td>{{ travel.travelFrom }}</td>
+      <td>{{ travel.travelTo }}</td>
+      <td>{{ travel.dateStart|date('d m Y') }}</td>
+      <td>{{ travel.dateEnd|date('d m Y') }}</td>
+        <td><a href="{{ path('editTravel',{'id':travel.id}) }}">Modifier</a></td>
+        <td><a href="{{ path('deleteTravel',{'id':travel.id}) }}">Supprimer</a></td>
+   </tr>
+ {%else%}
+       <tr>
+         <td> Aucun trajet</td>
+       </tr>
+{% endfor %}
+
+</table>
+
+<a href="{{ path('addTravel') }}">Ajouter un trajet</a>
+{% endblock body %}

@@ -1,0 +1,158 @@
+<?php
+
+namespace MyFirstBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * private_message
+ *
+ * @ORM\Table(name="private_message")
+ * @ORM\Entity(repositoryClass="MyFirstBundle\Repository\private_messageRepository")
+ */
+class private_message
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="content", type="string", length=255)
+     */
+    private $content;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id_sender", type="integer")
+     */
+    private $idSender;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id_receiver", type="integer")
+     */
+    private $idReceiver;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime")
+     */
+    private $date;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set content
+     *
+     * @param string $content
+     *
+     * @return private_message
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+
+        return $this;
+    }
+
+    /**
+     * Get content
+     *
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * Set idSender
+     *
+     * @param integer $idSender
+     *
+     * @return private_message
+     */
+    public function setIdSender($idSender)
+    {
+        $this->idSender = $idSender;
+
+        return $this;
+    }
+
+    /**
+     * Get idSender
+     *
+     * @return int
+     */
+    public function getIdSender()
+    {
+        return $this->idSender;
+    }
+
+    /**
+     * Set idReceiver
+     *
+     * @param integer $idReceiver
+     *
+     * @return private_message
+     */
+    public function setIdReceiver($idReceiver)
+    {
+        $this->idReceiver = $idReceiver;
+
+        return $this;
+    }
+
+    /**
+     * Get idReceiver
+     *
+     * @return int
+     */
+    public function getIdReceiver()
+    {
+        return $this->idReceiver;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return private_message
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+}

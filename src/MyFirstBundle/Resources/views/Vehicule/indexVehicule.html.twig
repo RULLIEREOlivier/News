@@ -1,0 +1,26 @@
+{% extends '::base.html.twig' %}
+{% block body%}
+   <table>
+	    <tr>
+		    <td>type</td>
+		    <td>available</td>
+		    <td>place_number</td>
+      </tr>
+{% for vehicule in allVehicules %}
+    <tr>
+      <td>{{vehicule.typeVehicule}}</td>
+      <td>{{vehicule.avaliable}}</td>
+      <td>{{vehicule.placeNumber}}</td>
+      <td><a href="{{ path('deleteVehicule',{'id':vehicule.id}) }}">Supprimer</a></td>
+     </tr>
+ {%else%}
+       <tr>
+         <td> Aucun vehicule</td>
+       </tr>
+{% endfor %}
+
+</table>
+
+<a href="{{ path('addVehicule') }}">Ajouter un vehicule</a>
+<a href="{{ path('index') }}">Index</a>
+{% endblock body %}

@@ -2,60 +2,56 @@
 
 namespace MyFirstBundle\Controller;
 
-use MyFirstBundle\Email\Email;
-use MyFirstBundle\Entity\News;
-use MyFirstBundle\Form\NewsType;
+use MyFirstBundle\Entity\Travel;
+use MyFirstBundle\Form\TravelType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class NewsController extends Controller
+class TravelController extends Controller
 {
     /**
-     * @Route("/", name="index")
+     * @Route("/indexTravel", name="indexTravel")
      *
      * @Template()
      */
-    public function indexAction()
+    public function indexTravelAction()
     {
-        //find all news
+        //find all Travel
         $manager = $this->getDoctrine()->getManager();
-        $repoNews = $manager->getRepository('MyFirstBundle:News');
-        $news = $repoNews->findAll();
+        $repoTravel = $manager->getRepository('MyFirstBundle:Travel');
+        $travel = $repoTravel->findAll();
 
         return[
-
-            'allNews' => $news,
+            'allTravel' => $travel,
         ];
-
-
     }
 
     /**
-     * @Route("/editNews/{id}", name="editNews")
+     * @Route("/editTravel/{id}", name="editTravel")
      *
      * @Template()
      */
-    public function editNewsAction(Request $request, $id)
+    public function editTravelAction(Request $request, $id)
     {
         //get repository
         $manager = $this->getDoctrine()->getManager();
-        $repository = $manager->getRepository('MyFirstBundle:News');
-        $news = $repository->find($id);
+        $repository = $manager->getRepository('MyFirstBundle:Travel');
+        $travel = $repository->find($id);
 
-        $form = $this->createForm(NewsType::class, $news);
+        $form = $this->createForm(TravelType::class, $travel);
 
         $form->handleRequest($request);
 
         if($form->isValid()){
-            $news = $form->getData();
-            $manager->persist($news);
+            $travel = $form->getData();
+            $manager->persist($travel);
 
             try{
                 $manager->flush();
-                return $this->redirect($this->generateUrl('index'));
+                return $this->redirect($this->generateUrl('indexTravel'));
             }
             catch(\Exception $e){
                 var_dump($e->getMessage());die;
@@ -70,22 +66,22 @@ class NewsController extends Controller
     }
 
     /**
-     * @Route("deleteNews/{id}", name="deleteNews")
+     * @Route("/deleteTravel/{id}", name="deleteTravel")
      * @param Request $request
      * @param $id
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteNewsAction(Request $request, $id)
+    public function deleteTravelAction(Request $request, $id)
     {
         $manager = $this->getDoctrine()->getManager();
-        $repository = $manager->getRepository('MyFirstBundle:News');
+        $repository = $manager->getRepository('MyFirstBundle:Travel');
 
         $manager->remove($repository->find($id));
 
         try{
             $manager->flush();
-            return  $this->redirect($this->generateUrl('index'));
+            return  $this->redirect($this->generateUrl('indexTravel'));
         }
         catch(\Exception $e){
             var_dump($e);die;
@@ -94,21 +90,20 @@ class NewsController extends Controller
     }
 
     /**
-     * @Route("/addNews", name="addNews")
+     * @Route("/addTravel", name="addTravel")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Template()
      */
-    public function addNewsAction(Request $request)
+    public function addTravelAction(Request $request)
     {
         $manager = $this->getDoctrine()->getManager();
-
-        $form = $this->createForm(NewsType::class);
+        $form = $this->createForm(TravelType::class);
 
         $form->handleRequest($request);
         if($form->isValid()){
-            $news = $form->getData();
-            $manager->persist($news);
+            $travel = $form->getData();
+            $manager->persist($travel);
 
             try{
                 $manager->flush();
@@ -118,7 +113,7 @@ class NewsController extends Controller
             }
 
 
-            return $this->redirect($this->generateUrl('index'));
+            return $this->redirect($this->generateUrl('indexTravel'));
         }
         return [
             'form' =>$form->createView(),
@@ -126,5 +121,4 @@ class NewsController extends Controller
 
 
     }
-
 }

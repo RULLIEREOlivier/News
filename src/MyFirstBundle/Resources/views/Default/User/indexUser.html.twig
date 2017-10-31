@@ -1,0 +1,32 @@
+
+{% extends '::index.html.twig' %}
+{% block body%}
+   <table>
+	    <tr>
+
+		    <td>login</td>
+		    <td>pass</td>
+		    <td>mail</td>
+		    <td>adress</td>
+		    <td>téléphone</td>
+
+        </tr>
+{% for user in allUsers %}
+    <tr>
+      <td>{{user.login}}</td>
+      <td>{{user.pass}}</td>
+      <td>{{user.mail}}</td>
+      <td>{{user.adress}}</td>
+      <td>{{user.tel}}</td>
+      <td><a href="{{ path('/editUsers/{id}', {'id':user.id}) }}">Modifier</a></td>
+     <td><a href="{{ path('/deleteUsers/{id}', {'id':user.id}) }}">Supprimer</a></td>
+     </tr>
+ {%else%}
+       <tr>
+         <td> Aucun utilisateur</td>
+       </tr>
+{% endfor %}
+</table>
+
+<a href="{{ path'/addUsers') }}">Ajouter un utilisateur</a>
+{% endblock body %}

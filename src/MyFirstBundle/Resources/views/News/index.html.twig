@@ -1,25 +1,36 @@
 {% extends '::base.html.twig' %}
-{% block body %}
-Hello World!
 
-    <table>
+{% block body %}
+    <a href="{{ path('indexVehicule') }}">Les Véhicules</a>
+    <a href="{{ path('indexTravel') }}">Les trajets</a>
+
+    <table style="border:1px solid black">
+        <h1>Evènements</h1>
         <tr>
             <td>auteur</td>
             <td>titre</td>
             <td>date</td>
             <td>contenu</td>
+            <td></td>
+            <td></td>
         </tr>
 
 {% for news in allNews %}
-    <tr>{{ news.author }}</tr>
-    <tr>{{ news.title }}</tr>
-    <tr>{{ news.date|date('d m Y') }}</tr>
-    <tr>{{ news.content }}</tr>
+    <tr>
+        <td>{{ news.author }}</td>
+        <td>{{ news.title }}</td>
+        <td>{{ news.date|date('d m Y') }}</td>
+        <td>{{ news.content }}</td>
+        <td><a href="{{ path('editNews',{'id':news.id}) }}">Modifier</a></td>
+        <td><a href="{{ path('deleteNews',{'id':news.id}) }}">Supprimer</a></td>
+    </tr>
 {% else %}
     <tr>
         <td colspan="4">Aucune news</td>
     </tr>
 {% endfor %}
-
     </table>
+
+    <a href="{{ path('addNews') }}">Ajouter un évènement</a>
+
 {% endblock body %}

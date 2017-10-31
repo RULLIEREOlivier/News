@@ -5,12 +5,12 @@ namespace MyFirstBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * News
+ * Tickets
  *
- * @ORM\Table(name="news")
+ * @ORM\Table(name="tickets")
  * @ORM\Entity(repositoryClass="MyFirstBundle\Repository\NewsRepository")
  */
-class News
+class Tickets
 {
     /**
      * @var int
@@ -36,10 +36,10 @@ class News
     private $content;
 
     /**
- * @var string
- *
- * @ORM\Column(name="author", type="string", length=255)
- */
+     * @var string
+     *
+     * @ORM\Column(name="author", type="string", length=255)
+     */
     private $author;
 
     /**
@@ -69,7 +69,7 @@ class News
      *
      * @param string $title
      *
-     * @return News
+     * @return Tickets
      */
     public function setTitle($title)
     {
@@ -93,7 +93,8 @@ class News
      *
      * @param string $content
      *
-     * @return News
+     *
+     * @return $this
      */
     public function setContent($content)
     {
@@ -133,7 +134,7 @@ class News
      */
     public function getAuthor()
     {
-       return $this ->author;
+        return $this ->author;
     }
 
     /**
