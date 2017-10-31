@@ -1,0 +1,25 @@
+{% extends '::base.html.twig' %}
+{% block body %}
+Hello World!
+
+    <table>
+        <tr>
+            <td>auteur</td>
+            <td>titre</td>
+            <td>date</td>
+            <td>contenu</td>
+        </tr>
+
+{% for news in allNews %}
+    <tr>{{ news.author }}</tr>
+    <tr>{{ news.title }}</tr>
+    <tr>{{ news.date|date('d m Y') }}</tr>
+    <tr>{{ news.content }}</tr>
+{% else %}
+    <tr>
+        <td colspan="4">Aucune news</td>
+    </tr>
+{% endfor %}
+
+    </table>
+{% endblock body %}
